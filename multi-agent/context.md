@@ -40,3 +40,22 @@
 ## 실행(개발)
 
 개발 시 샘플 데이터를 준비하고 `run_agents.py`로 실행합니다. 자세한 커맨드는 `README.md`에 적습니다.
+
+## 피부 상태 측정 매커니즘 (추가)
+
+- **시각적 정량화**: 사용자가 촬영한 얼굴 사진을 통해 홍조도(RGB 기반), 트러블 개수/면적, 모공 상태, 유분(광택) 등 객관적 지표를 추출합니다. 촬영 메타데이터(기온, 습도 등)와 결합해 환경 영향 분석을 지원합니다.
+- **주관적 피드백**: 슬라이더(1~5점)를 통해 따가움/가려움/속당김 등 주관적 감각을 수집하고, 이미지 기반 지표와 상호 검증합니다.
+- **맥락 태그**: 생리, 수면, 음주, 스트레스, 운동 여부 등 빠른 버튼형 태그로 수집하여 추가 공변량으로 사용합니다.
+
+## 데이터 구조(요약)
+
+레코드는 하루 단위 이벤트로 저장됩니다. 핵심 필드:
+
+- `environment`(X1): `temperature`, `humidity`, `pm25`, `uv_index`
+- `exposures`(X2): `products_used`, `cleanses_per_day`, `mask_used`
+- `internal`(X3): `sleep_hours`, `menstrual_phase`, `stress_level`, `exercise`
+- `visual_metrics`(Y_obj): `redness_score`, `lesion_count`, `lesion_area`, `pore_score`, `shine_score`
+- `subjective_scores`(Y_subj): 슬라이더 응답
+- `meta`: `user_id`, `timestamp`, `photo_uri`, `location`
+
+이 데이터 구조는 분석 파이프라인(상관분석, 회귀, 간단한 인과추정)에 바로 투입될 수 있도록 설계되었습니다.

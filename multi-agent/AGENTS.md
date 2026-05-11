@@ -42,4 +42,23 @@
 python run_agents.py --sample sample_records.txt
 ```
 
+## 피부 상태 측정 매커니즘 (요약)
+
+- **시각적 정량화 (Objective Data)**: 사용자가 촬영한 얼굴 사진에서 홍조도(RGB 기반), 트러블 개수/면적, 모공 상태, 유분(광택) 등 지표를 추출하는 이미지분석 에이전트를 둡니다. 촬영 시점의 기온/습도 데이터와 결합해 환경-피부 상호작용 추적을 지원합니다.
+- **사용자 피어드백 (Subjective Data)**: 챗봇이나 앱 인터페이스에서 1~5점 슬라이더로 감각(따가움, 가려움, 속당김 등)을 수집하여 이미지 기반 지표와 비교·보정합니다.
+- **맥락 태그 (Contextual Data)**: 생리 주기, 수면 시간, 음주, 스트레스, 운동 등 버튼형 태그로 빠르게 수집하며, 이 태그는 분석 에이전트의 공변량으로 사용됩니다.
+
+## 데이터 구조 제안 (Data Architecture)
+
+각 레코드는 하루 단위의 이벤트로 저장됩니다. 주요 필드는 다음과 같습니다.
+
+- `environment` (X1): `temperature`, `humidity`, `pm25`, `uv_index` (날씨 API 자동 수집)
+- `exposures` (X2): `products_used` (성분 리스트), `cleanses_per_day`, `mask_used` 등 (사용자 입력/영수증 인식)
+- `internal` (X3): `sleep_hours`, `menstrual_phase`, `stress_level`, `exercise` (앱 연동/선택형 태그)
+- `visual_metrics` (Y_obj): `redness_score`, `lesion_count`, `lesion_area`, `pore_score`, `shine_score` (사진 분석)
+- `subjective_scores` (Y_subj): 슬라이더 1~5 점수들
+- `meta`: `user_id`, `timestamp`, `photo_uri`, `location`
+
+이 구조는 분석 에이전트에서 `X` → `Y` 회귀/인과모형 및 시계열 비교(예: 전일 대비 홍조 변화%)에 바로 투입될 수 있도록 설계되었습니다.
+
 필요하면 `docs/`에 추가 설계 문서를 작성하고, 에이전트별 테스트 케이스를 `tests/`에 둡니다。

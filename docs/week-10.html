@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>week-10</title>
+  <style>
+
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+
+ul.task-list[class]{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+font-size: inherit;
+width: 0.8em;
+margin: 0 0.8em 0.2em -1.6em;
+vertical-align: middle;
+}
+.display.math{display: block; text-align: center; margin: 0.5rem auto;}
+
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+  <style type="text/css">body { max-width: 900px; margin: 2em auto; padding: 0 1em; font-family: -apple-system, "Helvetica Neue", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif; line-height: 1.6; color: #222; }
+h1, h2, h3, h4 { color: #111; margin-top: 1.6em; }
+h1 { border-bottom: 2px solid #333; padding-bottom: 0.3em; }
+h2 { border-bottom: 1px solid #ccc; padding-bottom: 0.2em; }
+code { background: #f3f4f6; padding: 0.1em 0.3em; border-radius: 3px; font-size: 0.95em; }
+pre { background: #f3f4f6; padding: 0.8em 1em; border-radius: 6px; overflow-x: auto; }
+pre code { background: none; padding: 0; font-size: 0.88em; }
+img { max-width: 100%; display: block; margin: 1em auto; }
+table { border-collapse: collapse; margin: 1em 0; }
+th, td { border: 1px solid #ddd; padding: 0.5em 0.8em; }
+th { background: #f8f9fa; }
+blockquote { border-left: 4px solid #93c5fd; padding: 0.4em 1em; background: #eff6ff; color: #1e3a8a; margin: 1em 0; }
+@media print {
+  body { max-width: 100%; }
+  h2 { page-break-before: auto; }
+  pre, img, table { page-break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">week-10</h1>
+</header>
+<h1 id="week-10.-코딩에이전트-도구-사용법-집중-실습">Week 10.
+코딩에이전트 도구 사용법 집중 실습</h1>
+<blockquote>
+<p>9주차 멀티에이전트 설계 과제를 이어 받아, 11~14주차 일정공지 에이전트
+프로젝트를 만들 준비를 한다.<br />
+이번 주의 목표는 코드를 많이 짜는 것이 아니라, 코딩에이전트에게 일을
+맡기고 결과를 검토하는 기본 절차를 익히는 것이다.</p>
+</blockquote>
+<hr />
+<h2 id="학습-목표">학습 목표</h2>
+<ul>
+<li>GitHub Copilot, Gemini CLI, Antigravity의 작업 방식을 구분한다.</li>
+<li>같은 작업을 세 도구에 지시해 보고 결과 차이를 비교한다.</li>
+<li><code>.github/copilot-instructions.md</code>,
+<code>context.md</code>, <code>todo.md</code>의 역할을 이해한다.</li>
+<li>9주차 설계 과제를 11주차 프로젝트 시작 문서로 바꾼다.</li>
+<li>코딩에이전트가 만든 결과를 그대로 믿지 않고, 계획과 변경 내용을
+확인한다.</li>
+</ul>
+<hr />
+<h2 id="이번-주-핵심-원칙">이번 주 핵심 원칙</h2>
+<ol type="1">
+<li>새 프로젝트를 시작하지 않는다. 9주차 과제를 이어 쓴다.</li>
+<li>세 도구를 깊게 파지 않는다. 공통 작업 흐름을 익힌다.</li>
+<li>코드는 최소화한다. 오늘의 산출물은 지시문, 컨텍스트 문서, 작업
+기록이다.</li>
+<li>자동 적용보다 검토를 우선한다. 계획을 보고, 변경 내용을 보고, 실행
+결과를 본다.</li>
+<li>11주차부터 만들 일정공지 에이전트의 준비 문서를 만든다.</li>
+</ol>
+<hr />
+<h2 id="주차-과제에서-출발하기">10.1 9주차 과제에서 출발하기</h2>
+<p>9주차 과제는 멀티에이전트 프로젝트의 설계 초안이다. 이번 주에는 그
+과제를 실제 개발에 쓸 수 있는 문서로 바꾼다.</p>
+<table>
+<thead>
+<tr>
+<th>9주차 과제 항목</th>
+<th>10주차에서 바꿀 문서</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>관심 도메인</td>
+<td><code>context.md</code>의 프로젝트 배경</td>
+</tr>
+<tr>
+<td>단일 에이전트의 한계</td>
+<td><code>context.md</code>의 문제 정의</td>
+</tr>
+<tr>
+<td>역할 분리</td>
+<td><code>context.md</code>의 에이전트 역할</td>
+</tr>
+<tr>
+<td>입력과 출력</td>
+<td><code>context.md</code>의 입출력 명세</td>
+</tr>
+<tr>
+<td>실패 조건</td>
+<td><code>todo.md</code>의 검증 항목</td>
+</tr>
+</tbody>
+</table>
+<p>11~14주차 공통 프로젝트는 “일정공지 에이전트”이다. 각자 다른 주제를
+새로 만들지 않는다. 대신 같은 프로젝트를 만들면서 입력 공지 예시나
+사용자 유형을 조금씩 바꿀 수 있다.</p>
+<hr />
+<h2 id="이번-프로젝트-일정공지-에이전트">10.2 이번 프로젝트: 일정공지
+에이전트</h2>
+<p>일정공지 에이전트는 여러 공지를 읽고, 날짜와 대상자를 정리한 뒤,
+사용자별로 해야 할 일을 안내하는 간단한 멀티에이전트 프로그램이다.</p>
+<p>기본 흐름은 다음과 같다.</p>
+<pre class="text"><code>[공지 입력]
+   ↓
+[사실 추출 에이전트]
+   ↓
+[일정 분류 에이전트]
+   ↓
+[안내문 작성 에이전트]
+   ↓
+[결과 출력]</code></pre>
+<p>처음에는 실제 AI 호출을 복잡하게 붙이지 않는다. Python 함수 여러 개를
+에이전트 역할처럼 나누고, 코딩에이전트에게 그 구조를 만들게 한다.</p>
+<hr />
+<h2 id="세-도구의-역할">10.3 세 도구의 역할</h2>
+<p>이번 주에는 세 도구를 모두 한 번씩 사용한다.</p>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th>도구</th>
+<th>수업에서의 역할</th>
+<th>강점</th>
+<th>주의점</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GitHub Copilot</td>
+<td>VS Code 안에서 빠르게 코드와 문서 초안 작성</td>
+<td>접근이 쉽고 편집 흐름이 자연스럽다</td>
+<td>지시가 넓으면 불필요한 파일을 만들 수 있다</td>
+</tr>
+<tr>
+<td>Gemini CLI</td>
+<td>터미널에서 프로젝트 파일을 읽고 작업</td>
+<td>명령 실행과 파일 단위 작업을 시키기 좋다</td>
+<td>계획 없이 바로 수정하게 두면 추적이 어렵다</td>
+</tr>
+<tr>
+<td>Antigravity</td>
+<td>Agent Manager로 작업 단위를 관리</td>
+<td>여러 단계 작업과 변경 검토가 편하다</td>
+<td>도구 UI에 익숙해지는 시간이 필요하다</td>
+</tr>
+<tr>
+<td>Playwright CLI</td>
+<td>브라우저에서 HTML과 결과 화면을 확인</td>
+<td>화면 확인과 스크린샷에 좋다</td>
+<td>MCP가 아니라 CLI로만 사용한다</td>
+</tr>
+</tbody>
+</table>
+<p>중요한 것은 특정 도구의 메뉴를 외우는 것이 아니다. 세 도구 모두 다음
+흐름으로 쓴다.</p>
+<pre class="text"><code>컨텍스트 제공 → 계획 요청 → 계획 검토 → 실행 요청 → 변경 확인 → 실행 검증</code></pre>
+<hr />
+<h2 id="playwright-cli-설치">10.4 Playwright CLI 설치</h2>
+<p>이번 수업에서는 Playwright MCP를 붙이지 않는다. 대신 Playwright CLI를
+설치해 HTML 자료, README 미리보기, 나중에 만들 간단한 웹 출력 화면을
+브라우저에서 확인한다.</p>
+<p>공식 Playwright Agent CLI 기준 설치 명령은 다음과 같다.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">npm</span> install <span class="at">-g</span> @playwright/cli@latest</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">playwright-cli</span> <span class="at">--help</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="ex">playwright-cli</span> install-browser</span></code></pre></div>
+<p>Windows PowerShell에서도 같은 명령을 사용한다.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>npm install <span class="op">-</span>g @playwright<span class="op">/</span>cli@latest</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>playwright-cli <span class="op">--</span>help</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>playwright-cli install-browser</span></code></pre></div>
+<p>설치 확인:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">playwright-cli</span> <span class="at">--help</span></span></code></pre></div>
+<p>사용 예시는 다음 정도만 다룬다.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">playwright-cli</span> open docs/week-10.html</span></code></pre></div>
+<p>브라우저가 열리면 성공이다. 이번 주에는 자동 테스트 코드를 만들지
+않는다. 목적은 “브라우저 확인을 CLI로 할 수 있다”를 경험하는 것이다.</p>
+<hr />
+<h2 id="공통-준비-파일">10.5 공통 준비 파일</h2>
+<p>프로젝트 루트에 다음 파일을 만든다.</p>
+<pre class="text"><code>AGENTS.md
+.github/copilot-instructions.md
+GEMINI.md
+.agents/skills/schedule-agent/SKILL.md
+.agents/skills/playwright-check/SKILL.md
+context.md
+todo.md
+week10_tool_practice.md</code></pre>
+<p>운영 방식은 단순하다.</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>도구</th>
+<th>자동/수동 사용 방식</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GitHub Copilot</td>
+<td>VS Code에서는 <code>AGENTS.md</code>를 인식할 수 있다. 그래도
+<code>.github/copilot-instructions.md</code>에서
+<code>AGENTS.md</code>를 다시 가리키게 둔다</td>
+</tr>
+<tr>
+<td>Gemini CLI</td>
+<td><code>GEMINI.md</code>를 읽게 하고, 그 안에서
+<code>AGENTS.md</code>를 공통 규칙으로 지정한다</td>
+</tr>
+<tr>
+<td>Antigravity</td>
+<td>프로젝트 루트의 <code>AGENTS.md</code>를 읽게 하거나, 첫 요청에서
+“먼저 AGENTS.md를 읽어라”라고 지시한다</td>
+</tr>
+</tbody>
+</table>
+<p>도구를 바꿀 때마다 첫 요청은 다음처럼 통일한다.</p>
+<pre class="text"><code>먼저 AGENTS.md, context.md, todo.md를 읽어줘.
+아직 파일을 수정하지 말고, 오늘 할 작업 계획만 말해줘.</code></pre>
+<h3 id="agents.md"><code>AGENTS.md</code></h3>
+<p>세 도구가 공통으로 참고할 규칙 파일이다. Copilot, Gemini CLI,
+Antigravity를 번갈아 쓰더라도 같은 규칙을 유지하기 위해 루트에 둔다.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># AGENTS.md</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>이 파일은 GitHub Copilot, Gemini CLI, Antigravity에서 공통으로 참고할 프로젝트 규칙이다.</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="fu">## 프로젝트</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>이름: 일정공지 에이전트</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>기본 실행: <span class="in">`python schedule_agent.py`</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>기본 작업 파일: <span class="in">`schedule_agent.py`</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="fu">## 작업 방식</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>파일을 수정하기 전에 먼저 계획을 제시한다.</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>한 번에 많은 파일을 바꾸지 않는다.</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>오류가 나면 새 기능을 추가하지 말고 오류만 고친다.</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>변경 후 실행 명령과 확인 결과를 보고한다.</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="fu">## 금지</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>불필요한 패키지 설치</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>API 키 하드코딩</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>복잡한 프레임워크 임의 추가</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Playwright MCP 연결</span></code></pre></div>
+<h3 id="githubcopilot-instructions.md"><code>.github/copilot-instructions.md</code></h3>
+<p>GitHub Copilot용 연결 파일이다. 공통 규칙을 길게 반복하지 않고
+<code>AGENTS.md</code>를 읽게 한다.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Copilot Instructions</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>이 저장소의 공통 작업 규칙은 루트의 <span class="in">`AGENTS.md`</span>에 있다.</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>작업을 시작할 때 먼저 <span class="in">`AGENTS.md`</span>, <span class="in">`context.md`</span>, <span class="in">`todo.md`</span>를 읽고 따른다.</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>요약:</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>기본 실행 명령은 <span class="in">`python schedule_agent.py`</span>이다.</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>파일을 수정하기 전에 먼저 계획을 제시한다.</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>한 번에 많은 파일을 바꾸지 않는다.</span></code></pre></div>
+<h3 id="gemini.md"><code>GEMINI.md</code></h3>
+<p>Gemini CLI용 연결 파일이다. Gemini CLI는 <code>GEMINI.md</code>를 잘
+읽으므로, 여기서 <code>AGENTS.md</code>를 공통 규칙으로 지정한다.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># GEMINI.md</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>이 저장소의 공통 작업 규칙은 루트의 <span class="in">`AGENTS.md`</span>에 있다.</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>작업을 시작할 때 먼저 <span class="in">`AGENTS.md`</span>, <span class="in">`context.md`</span>, <span class="in">`todo.md`</span>를 읽고 따른다.</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>요약:</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>기본 실행 명령은 <span class="in">`python schedule_agent.py`</span>이다.</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>파일을 수정하기 전에 먼저 계획을 제시한다.</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>한 번에 많은 파일을 바꾸지 않는다.</span></code></pre></div>
+<hr />
+<h2 id="프로젝트-skills">10.6 프로젝트 Skills</h2>
+<p>이번 수업에서 말하는 skill은 거창한 플러그인이 아니다. 코딩에이전트가
+반복해서 참고할 작업 절차 문서이다. 프로젝트에는 두 개만 둔다.</p>
+<pre class="text"><code>.agents/skills/schedule-agent/SKILL.md
+.agents/skills/playwright-check/SKILL.md</code></pre>
+<h3 id="skill-1.-일정공지-에이전트-제작">Skill 1. 일정공지 에이전트
+제작</h3>
+<div class="sourceCode" id="cb13"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="an">name:</span><span class="co"> schedule-agent</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> 일정공지 에이전트의 기능을 만들거나 수정할 때 사용한다.</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="fu"># Schedule Agent Skill</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="fu">## 목표</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>공지 텍스트에서 일정 정보를 뽑고, 사용자별 안내문을 만든다.</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="fu">## 기본 흐름</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>사실 추출: 제목, 대상, 날짜, 해야 할 일, 준비물을 뽑는다.</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>일정 분류: 사용자 유형별로 공지를 나눈다.</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>안내문 작성: 사용자별 해야 할 일을 Markdown으로 쓴다.</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>검토: 날짜 누락, 대상 불명확, 공지에 없는 단정 표현을 확인한다.</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a><span class="fu">## 작업 원칙</span></span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>먼저 계획을 제시한다.</span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`schedule_agent.py`</span> 중심으로 수정한다.</span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>외부 패키지는 추가하지 않는다.</span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>변경 후 <span class="in">`python schedule_agent.py`</span> 실행 결과를 보고한다.</span></code></pre></div>
+<h3 id="skill-2.-playwright-화면-확인">Skill 2. Playwright 화면
+확인</h3>
+<div class="sourceCode" id="cb14"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="an">name:</span><span class="co"> playwright-check</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> HTML 자료나 출력 화면을 브라우저로 확인할 때 사용한다.</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="fu"># Playwright Check Skill</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="fu">## 목표</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>Playwright CLI로 HTML 또는 로컬 페이지가 열리는지 확인한다.</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="fu">## 기본 명령</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="ex">playwright-cli</span> open docs/week-10.html</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a><span class="fu">## 작업 원칙</span></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Playwright MCP를 설정하지 않는다.</span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>브라우저 확인이 필요한 경우에만 사용한다.</span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>화면 확인 결과를 한두 문장으로 보고한다.</span></code></pre></div>
+<hr />
+<h3 id="context.md"><code>context.md</code></h3>
+<p>코딩에이전트가 읽을 프로젝트 설명서이다.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># 일정공지 에이전트 프로젝트</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">## 목표</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>여러 학과 공지를 읽고, 대상자와 날짜를 정리한 뒤, 사용자별 해야 할 일을 안내한다.</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="fu">## 입력</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>공지 여러 개가 들어 있는 텍스트.</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="fu">## 출력</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>공지별 핵심 일정 표와 사용자별 안내문.</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="fu">## 에이전트 역할</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>사실 추출 에이전트: 제목, 대상, 날짜, 준비물을 뽑는다.</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>일정 분류 에이전트: 학년이나 사용자 유형별로 공지를 나눈다.</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>안내문 작성 에이전트: 사용자가 해야 할 일을 짧게 쓴다.</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a><span class="fu">## 제약</span></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>처음에는 Python 기본 코드로 만든다.</span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>코드는 <span class="in">`schedule_agent.py`</span> 하나에서 시작한다.</span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>실행 결과는 터미널에 출력하고, 나중에 <span class="in">`output.md`</span>로 저장한다.</span></code></pre></div>
+<h3 id="todo.md"><code>todo.md</code></h3>
+<p>작업 목록이다. 코딩에이전트에게 “무엇부터 할지”를 알려준다.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Todo</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> sample notices를 정한다.</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> 사실 추출 에이전트 함수를 만든다.</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> 일정 분류 에이전트 함수를 만든다.</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> 안내문 작성 에이전트 함수를 만든다.</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> 전체 흐름을 실행하는 main 함수를 만든다.</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> 결과를 Markdown 표로 출력한다.</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> README에 실행 방법을 쓴다.</span></code></pre></div>
+<hr />
+<h2 id="github-copilot-실습">10.7 GitHub Copilot 실습</h2>
+<h3 id="목표">목표</h3>
+<p>Copilot에게 프로젝트 규칙과 컨텍스트를 읽히고, 11주차 개발을 위한
+문서 초안을 만들게 한다.</p>
+<h3 id="절차">절차</h3>
+<ol type="1">
+<li>VS Code에서 프로젝트 루트를 연다.</li>
+<li><code>.github/copilot-instructions.md</code>를 만든다.</li>
+<li><code>context.md</code>, <code>todo.md</code>를 만든다.</li>
+<li>Copilot Chat에 다음과 같이 요청한다.</li>
+</ol>
+<pre class="text"><code>context.md와 todo.md를 읽고, 11주차에 만들 일정공지 에이전트의 개발 순서를 더 쉽게 정리해줘.
+코드는 아직 만들지 말고, todo.md를 수업 실습 단계로 다듬어줘.</code></pre>
+<h3 id="확인할-것">확인할 것</h3>
+<table>
+<thead>
+<tr>
+<th>확인 항목</th>
+<th>질문</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>범위</td>
+<td>Copilot이 일정공지 에이전트 범위를 벗어나지 않았는가</td>
+</tr>
+<tr>
+<td>난이도</td>
+<td>갑자기 LangGraph, RAG, Docker를 넣지 않았는가</td>
+</tr>
+<tr>
+<td>실행 가능성</td>
+<td>11주차 90분 안에 시작할 수 있는 순서인가</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="gemini-cli-실습">10.8 Gemini CLI 실습</h2>
+<h3 id="목표-1">목표</h3>
+<p>터미널에서 프로젝트 파일을 읽고, 계획을 먼저 받은 뒤 작업을 시키는
+습관을 만든다.</p>
+<h3 id="기본-흐름">기본 흐름</h3>
+<div class="sourceCode" id="cb18"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="ex">gemini</span></span></code></pre></div>
+<p>Gemini CLI 안에서 다음과 같이 요청한다.</p>
+<pre class="text"><code>이 프로젝트의 context.md와 todo.md를 읽어줘.
+아직 파일을 수정하지 말고, 일정공지 에이전트를 만들기 위한 5단계 계획만 제시해줘.
+각 단계는 수업 초보자가 따라 할 수 있게 짧게 써줘.</code></pre>
+<p>계획이 적절하면 다음 요청을 한다.</p>
+<pre class="text"><code>좋아. 이제 todo.md만 수정해줘.
+11주차에는 뼈대 만들기, 12주차에는 사실 추출, 13주차에는 사용자별 안내문, 14주차에는 최종 정리로 나누어줘.</code></pre>
+<h3 id="확인할-것-1">확인할 것</h3>
+<p>Gemini CLI는 명령 실행이나 파일 수정이 편하다. 대신 바로 수정시키기
+전에 반드시 계획을 먼저 받는다.</p>
+<pre class="text"><code>먼저 계획만 말해줘. 아직 파일을 수정하지 마.</code></pre>
+<p>이 문장을 자주 사용한다.</p>
+<hr />
+<h2 id="antigravity-실습">10.9 Antigravity 실습</h2>
+<h3 id="목표-2">목표</h3>
+<p>Agent Manager에서 하나의 작업을 만들고, 변경 내용을 검토하는 흐름을
+익힌다.</p>
+<h3 id="절차-1">절차</h3>
+<ol type="1">
+<li>Antigravity에서 프로젝트 루트를 연다.</li>
+<li>Agent Manager를 연다.</li>
+<li>새 작업을 만든다.</li>
+<li>다음 지시를 입력한다.</li>
+</ol>
+<pre class="text"><code>context.md와 todo.md를 읽고, 일정공지 에이전트 프로젝트를 위한 README 초안을 작성해줘.
+아직 코드는 만들지 말고, 프로젝트 목표, 실행 예정 파일, 주차별 개발 계획만 정리해줘.</code></pre>
+<ol start="5" type="1">
+<li>계획 또는 작업 단계를 먼저 확인한다.</li>
+<li>변경된 파일을 검토한다.</li>
+<li>마음에 들지 않으면 다음처럼 다시 지시한다.</li>
+</ol>
+<pre class="text"><code>내용이 너무 어렵다. LangGraph, RAG, 배포 내용은 빼고, Python 기본 코드로 만드는 일정공지 에이전트 설명만 남겨줘.</code></pre>
+<hr />
+<h2 id="같은-작업을-세-도구에-시켜-보기">10.10 같은 작업을 세 도구에
+시켜 보기</h2>
+<p>세 도구에 같은 작업을 시킨다.</p>
+<pre class="text"><code>9주차 멀티에이전트 설계 과제를 바탕으로, 일정공지 에이전트 프로젝트의 context.md 초안을 만들어줘.
+초보자가 이해할 수 있게 입력, 출력, 역할 3개, 하지 않을 일을 구분해줘.</code></pre>
+<p>결과를 비교한다.</p>
+<table>
+<thead>
+<tr>
+<th>비교 항목</th>
+<th>Copilot</th>
+<th>Gemini CLI</th>
+<th>Antigravity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>지시를 잘 지켰는가</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>너무 어려운 내용을 넣었는가</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>파일 변경을 확인하기 쉬웠는가</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>다시 수정시키기 쉬웠는가</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>내가 계속 쓸 도구로 적합한가</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="수업-활동">10.11 수업 활동</h2>
+<p>90분 수업은 다음 순서로 진행한다.</p>
+<table>
+<thead>
+<tr>
+<th>시간</th>
+<th>활동</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0~10분</td>
+<td>9주차 과제와 11~14주차 프로젝트 연결 설명</td>
+</tr>
+<tr>
+<td>10~20분</td>
+<td>Playwright CLI 설치와 브라우저 열기 확인</td>
+</tr>
+<tr>
+<td>20~35분</td>
+<td>Copilot 실습: instruction, context, todo 만들기</td>
+</tr>
+<tr>
+<td>35~50분</td>
+<td>Gemini CLI 실습: <code>GEMINI.md</code>와 계획 먼저 받기</td>
+</tr>
+<tr>
+<td>50~65분</td>
+<td>프로젝트 skill 2개 만들기</td>
+</tr>
+<tr>
+<td>65~80분</td>
+<td>Antigravity 실습과 세 도구 결과 비교</td>
+</tr>
+<tr>
+<td>80~90분</td>
+<td>주 도구 선택, 제출물 정리</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="homework">10.12 Homework</h2>
+<p>다음 파일을 제출한다.</p>
+<pre class="text"><code>.github/copilot-instructions.md
+GEMINI.md
+.agents/skills/schedule-agent/SKILL.md
+.agents/skills/playwright-check/SKILL.md
+context.md
+todo.md
+week10_tool_practice.md</code></pre>
+<p><code>week10_tool_practice.md</code> 양식:</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># 10주차 도구 실습 기록</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="fu">## GitHub Copilot</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>내가 준 지시:</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>나온 결과:</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>수정 요청:</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>배운 점:</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a><span class="fu">## Gemini CLI</span></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>내가 준 지시:</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>나온 결과:</span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>수정 요청:</span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>배운 점:</span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a><span class="fu">## Antigravity</span></span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>내가 준 지시:</span>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>나온 결과:</span>
+<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>수정 요청:</span>
+<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>배운 점:</span>
+<span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-21"><a href="#cb26-21" aria-hidden="true" tabindex="-1"></a><span class="fu">## 세 도구 비교</span></span>
+<span id="cb26-22"><a href="#cb26-22" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 항목 <span class="pp">|</span> 가장 편한 도구 <span class="pp">|</span> 이유 <span class="pp">|</span></span>
+<span id="cb26-23"><a href="#cb26-23" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---|---|</span></span>
+<span id="cb26-24"><a href="#cb26-24" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 문서 작성 <span class="pp">|</span>  <span class="pp">|</span>  <span class="pp">|</span></span>
+<span id="cb26-25"><a href="#cb26-25" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 코드 생성 <span class="pp">|</span>  <span class="pp">|</span>  <span class="pp">|</span></span>
+<span id="cb26-26"><a href="#cb26-26" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 오류 수정 <span class="pp">|</span>  <span class="pp">|</span>  <span class="pp">|</span></span>
+<span id="cb26-27"><a href="#cb26-27" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 변경 검토 <span class="pp">|</span>  <span class="pp">|</span>  <span class="pp">|</span></span>
+<span id="cb26-28"><a href="#cb26-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-29"><a href="#cb26-29" aria-hidden="true" tabindex="-1"></a><span class="fu">## 11주차에 사용할 주 도구</span></span>
+<span id="cb26-30"><a href="#cb26-30" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>선택:</span>
+<span id="cb26-31"><a href="#cb26-31" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>이유:</span></code></pre></div>
+<hr />
+<h2 id="체크리스트">체크리스트</h2>
+<ul>
+<li>9주차 과제 내용을 <code>context.md</code>에 반영했다.</li>
+<li><code>.github/copilot-instructions.md</code>를 만들었다.</li>
+<li>세 도구를 모두 한 번 이상 사용했다.</li>
+<li>도구별 결과 차이를 기록했다.</li>
+<li>11주차에 사용할 주 도구를 정했다.</li>
+</ul>
+<hr />
+<h2 id="다음-주-예고">다음 주 예고</h2>
+<p>11주차에는 일정공지 에이전트의 첫 번째 버전을 만든다. LangGraph
+Supervisor를 어렵게 구현하지 않는다. 먼저 Python 함수 3개로
+<code>사실 추출 → 일정 분류 → 안내문 작성</code> 흐름을 만들고,
+코딩에이전트에게 그 뼈대를 생성하게 한다.</p>
+</body>
+</html>
